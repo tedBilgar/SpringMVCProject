@@ -11,6 +11,10 @@
     <title>Product</title>
 </head>
 <body>
+${product.id}<br>
+${product.name}<br>
+${product.price}<br>
+${product.weight}<br>
 <table border="1" cellpadding="5">
     <caption><h2>List of products</h2></caption>
     <tr>
@@ -25,7 +29,6 @@
             <td><c:out value="${product.price}" /></td>
             <td><c:out value="${product.weight}" /></td>
         </tr>
-
 </table>
 </body>
 </html>

@@ -23,7 +23,7 @@ public class ProductRepoImpl implements ProductRepo {
 
     public Product findById(String id) {
         for (Product product:products) {
-            if(product.getId()==id) return product;
+            if(product.getId().equals(id)) return product;
         }
         return null;
     }
