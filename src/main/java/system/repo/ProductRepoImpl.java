@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public class ProductRepoImpl implements ProductRepo {
 
-    private List<Product> products = Arrays.asList(new Product("1","Coca-Cola","24","80"),
+    private List<Product> products = Arrays.asList(new Product("1","Coca-Cola","15","50"),
             new Product("2","Tea","80","120"),
             new Product("3","Coffee","120","200"),
             new Product("4","Bread","80","250"),
