@@ -11,10 +11,6 @@
     <title>Product</title>
 </head>
 <body>
-${product.id}<br>
-${product.name}<br>
-${product.price}<br>
-${product.weight}<br>
 <table border="1" cellpadding="5">
     <caption><h2>List of products</h2></caption>
     <tr>
@@ -24,11 +20,10 @@ ${product.weight}<br>
         <th>Weight</th>
     </tr>
         <tr>
-            <td><c:out value="${product.id}" /></td>
-            <td><c:out value="${product.name}" /></td>
-            <td><c:out value="${product.price}" /></td>
-            <td><c:out value="${product.weight}" /></td>
-        </tr>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td>${product.weight}</td>
 </table>
 </body>
 </html>
