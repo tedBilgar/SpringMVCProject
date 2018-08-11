@@ -6,16 +6,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import system.model.Product;
 import system.model.Select;
+import system.repo.ProductRepo;
 import system.service.ProductService;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
+// Старая версия контроллера
 @Controller
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductRepo productRepo;
 
     @RequestMapping(value = "/findAll",method = RequestMethod.GET)
     public String findAll(Model model){
@@ -33,14 +38,16 @@ public class ProductController {
     @RequestMapping(value = "/name/{productName}",method = RequestMethod.GET)
     public String findByName(@PathVariable("productName") String productName,Model model){
         //model.addAttribute("products",productService.findByName(productName));
-        model.addAttribute("product",productService.findByName(productName));
+       /* model.addAttribute("product",productService.findByName(productName));*/
         return "product";
     }
 
-    @RequestMapping(value = "/form",method = RequestMethod.GET)
-    public String getForm(){
-        return "form";
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addProduct(@ModelAttribute("product")Product product ){
+         return "redirect:main";
     }
+
+
 
     @RequestMapping(value = "/select",method = RequestMethod.POST)
     public String selectProduct(@ModelAttribute Select select,Model model){
@@ -49,5 +56,16 @@ public class ProductController {
         model.addAttribute("select",select);
         model.addAttribute("allProducts",productService.findAll());
         return "selectProducts";
+    }
+
+    @RequestMapping(value = "/form",method = RequestMethod.GET)
+    public String getForm(){
+        return "form";
+    }
+
+    @RequestMapping(value = "/set",method = RequestMethod.GET)
+    public String setProducts(){
+        System.out.println(productRepo.findAll());
+        return "form";
     }
 }

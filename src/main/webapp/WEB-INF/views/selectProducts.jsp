@@ -12,12 +12,30 @@
     <title>Products</title>
 </head>
 <body>
+    <style>
+        .horizontal-line {
+            width: 1000px;
+            border: 1px solid green;
+            height: 0
+        }
+    </style>
+    <div>
+        Enter for NEW Product
+        <form action="/product/add" method="post">
+            Product Name: <input type="text" name="name">
+            Product Price <input type="text" name="price">
+            Product Weight <input type="text" name="weight">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="horizontal-line"></div>
 
-<div>
-    We select products for your wishes:
-    <${select.sum} RUB<br><br>
-    +-${select.selectWeight} grams<br><br>
-</div>
+
+    <div>
+        We select products for your wishes:
+        <${select.sum} RUB<br><br>
+        +-${select.selectWeight} grams<br><br>
+    </div>
 <div>
 
     <form action="/product/select" method="post">

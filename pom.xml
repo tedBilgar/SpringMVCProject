@@ -36,30 +36,65 @@
             <artifactId>spring-webmvc</artifactId>
             <version>5.0.6.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>5.0.6.RELEASE</version>
+        </dependency>
 
-        <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+        <!-- JSP supports-->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
 
+        <!-- Для конфигурации приложения -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+
+        <!-- Логирование -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.20</version>
             <scope>provided</scope>
         </dependency>
+
+        <!--Поддержка Entity -->
         <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.17.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.2.17.Final</version>
+        </dependency>
+
+        <!-- Поддержка драйера JDBC-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.0.5.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <!--MySQL supports-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+
+
     </dependencies>
 </project>

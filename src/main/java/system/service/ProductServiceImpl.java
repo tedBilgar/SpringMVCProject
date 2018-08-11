@@ -12,18 +12,6 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductRepo productRepo;
 
-    public List<Product> findAll() {
-        return productRepo.findAll();
-    }
-
-    public Product findById(String id) {
-        return productRepo.findById(id);
-    }
-
-    public Product findByName(String name) {
-        return productRepo.findByName(name);
-    }
-
     public List<Product> selectProducts(int sum, int weight) {
         List<Product> products = productRepo.findAll();
         List<Product> selectProducts = new ArrayList<Product>();
@@ -57,5 +45,25 @@ public class ProductServiceImpl implements ProductService{
             }
         }
         return null;
+    }
+
+    public void addProduct(Product product) {
+        productRepo.addProduct(product);
+    }
+
+    public List<Product> findAll() {
+        return productRepo.findAll();
+    }
+
+    public void deleteProduct(String id) {
+        productRepo.deleteProduct(id);
+    }
+
+    public void updateProduct(Product product) {
+        productRepo.updateProduct(product);
+    }
+
+    public Product findById(String id) {
+        return productRepo.findById(id);
     }
 }

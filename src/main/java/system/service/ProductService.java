@@ -5,9 +5,11 @@ import system.model.Product;
 import java.util.List;
 
 public interface ProductService {
+    public void addProduct(Product product);
     public List<Product> findAll();
-    public Product findById(String id);
-    public Product findByName(String name);
+    public void deleteProduct(String id);
+    public void updateProduct(Product product);
 
-    public List<Product> selectProducts(int sum,int weight);
+    public Product findById(String id);
+    public List<Product> selectProducts(int sum, int weight);
 }
