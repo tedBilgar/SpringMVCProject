@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -25,6 +26,7 @@ import java.util.Properties;
 @EnableWebMvc
 @ComponentScan("system")
 @EnableTransactionManagement
+@Import({SecurityConfig.class})
 public class WebConfig {
     @Bean
     public ViewResolver viewResolver(){

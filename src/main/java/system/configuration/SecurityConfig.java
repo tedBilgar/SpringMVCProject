@@ -55,16 +55,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
            throws Exception {
        auth
                .inMemoryAuthentication()
-               .withUser("user").password("123456").roles("USER").and()
+               .withUser("user").password("{noop}123456").roles("USER").and()
                .withUser("admin").password("password").roles("USER", "ADMIN");
    }
 
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
-                .formLogin().successForwardUrl("/").and()
+                .formLogin().and()
                 .httpBasic();
     }
 }
