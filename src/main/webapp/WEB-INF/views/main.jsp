@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Денис
@@ -23,6 +24,12 @@
     }
     </style>
     <h1>Product List</h1>
+    <!-- FOR EXAMPLE-->
+    <div>
+        <sec:authorize access="isAuthenticated()">AUTH</sec:authorize>
+        <sec:authorize access="isAnonymous()">NOT AUTH</sec:authorize>
+    </div>
+    <!-- -->
     <table>
         <table border="1" cellpadding="5">
             <caption><h2>List of ALL products</h2></caption>

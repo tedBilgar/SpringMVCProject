@@ -8,12 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import system.model.Product;
 import system.repo.ProductRepo;
+
 
 
 import javax.sql.DataSource;
@@ -63,5 +65,10 @@ public class WebConfig {
         transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
     }
+
+ /*   @Bean
+    public UserDetailsService getUserDetailsService(){
+        return new UserDetailServiceImpl();
+    }*/
 
 }
