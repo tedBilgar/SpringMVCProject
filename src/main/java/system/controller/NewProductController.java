@@ -49,4 +49,5 @@ public class NewProductController {
 
         return "redirect:/";
     }
+    //
 }
