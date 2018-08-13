@@ -9,7 +9,7 @@ public class UserRepoImpl implements UserRepo {
         //Временно создаю без базы данных
         User user = new User();
         user.setUsername(username);
-        user.setPassword("123456");
+        user.setPassword("$2a$04$SRTSWrsS0Nrn1UXtGkR1b.AgkLUErHhyEgGVXS4rp2V2snWaP3ex.");
 
         return user;
     }

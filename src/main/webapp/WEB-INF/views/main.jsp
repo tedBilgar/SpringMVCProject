@@ -30,7 +30,8 @@
         <sec:authorize access="isAnonymous()">NOT AUTH</sec:authorize>
     </div>
     <!-- -->
-    <table>
+
+<table>
         <table border="1" cellpadding="5">
             <caption><h2>List of ALL products</h2></caption>
             <tr>
@@ -38,7 +39,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Weight</th>
-                <th>Delete</th>
+<sec:authorize access="hasAuthority('ADMIN')" ><th>Delete</th></sec:authorize>
             </tr>
             <c:forEach var="product" items="${listOfProducts}">
                 <tr>
@@ -46,7 +47,7 @@
                     <td>${product.name}</td>
                     <td>${product.price}</td>
                     <td>${product.weight}</td>
-                    <td><a href="<c:url value='/delete/${product.id}'/>">Delete</a></td>
+                    <sec:authorize access="hasAuthority('ADMIN')"><td><a href="<c:url value='/delete/${product.id}'/>">Delete</a></td></sec:authorize>
                 </tr>
             </c:forEach>
         </table>
@@ -75,28 +76,30 @@
 <br><br>
 <div class="horizontal-line"></div>
 <div>
-    <div>
-        <h1>Product adding</h1>
-        <form:form action="/add" modelAttribute="product">
-            <form:label path="name">
-                <spring:message text="Name"/>
-            </form:label>
-            <form:input path="name"/>
-            <br><br>
-            <form:label path="price">
-                <spring:message text="Price"/>
-            </form:label>
-            <form:input path="price"/>
-            <br><br>
-            <form:label path="weight">
-                <spring:message text="Weight"/>
-            </form:label>
-            <form:input path="weight"/>
-            <br><br>
+    <sec:authorize access="hasAuthority('ADMIN')">
+        <div>
+            <h1>Product adding</h1>
+            <form:form action="/add" modelAttribute="product">
+                <form:label path="name">
+                    <spring:message text="Name"/>
+                </form:label>
+                <form:input path="name"/>
+                <br><br>
+                <form:label path="price">
+                    <spring:message text="Price"/>
+                </form:label>
+                <form:input path="price"/>
+                <br><br>
+                <form:label path="weight">
+                    <spring:message text="Weight"/>
+                </form:label>
+                <form:input path="weight"/>
+                <br><br>
 
-            <input type="submit" value="submit">
-        </form:form>
-    </div
+                <input type="submit" value="submit">
+            </form:form>
+        </div>
+    </sec:authorize>
     <div class="horizontal-line"></div>
     <div>
         <h1>Select Products</h1>

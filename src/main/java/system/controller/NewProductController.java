@@ -50,7 +50,7 @@ public class NewProductController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/loginForm",method = RequestMethod.GET)
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String getLoginForm(){
         return "loginForm";
     }

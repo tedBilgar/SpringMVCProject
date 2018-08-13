@@ -10,13 +10,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import system.model.Product;
 import system.repo.ProductRepo;
-
+import system.service.SpringDataUserDetailsService;
 
 
 import javax.sql.DataSource;
@@ -68,9 +69,15 @@ public class WebConfig {
         return transactionManager;
     }
 
- /*   @Bean
-    public UserDetailsService getUserDetailsService(){
-        return new UserDetailServiceImpl();
-    }*/
+    @Bean
+    public SpringDataUserDetailsService springDataUserDetailsService() {
+        return new SpringDataUserDetailsService();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        int strength = 4;
+        return new BCryptPasswordEncoder(strength);
+    }
 
 }

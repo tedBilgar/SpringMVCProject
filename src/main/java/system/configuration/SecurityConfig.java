@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import system.service.SpringDataUserDetailsService;
 
 
 @Configuration
@@ -15,56 +18,34 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-   /* @Autowired
-    private UserDetailServiceImpl userDetailsService;
+   @Autowired
+   private SpringDataUserDetailsService springDataUserDetailsService;
+   @Autowired
+   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-    }
-
-    @Autowired
-    public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService);
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest().permitAll()
-                .and();
-        http.formLogin()
-                // указываем страницу с формой логина
-                .loginPage("/loginForm")
-                // указываем action с формы логина
-                .loginProcessingUrl("/processLogin")
-                // указываем URL при неудачном логине
-                .failureUrl("/login?error")
-                //Удачный вход
-                .successForwardUrl("/")
-                // Указываем параметры логина и пароля с формы логина
-                .usernameParameter("username")
-                .passwordParameter("password")
-                // даем доступ к форме логина всем
-                .permitAll();
-    }*/
    @Override
    protected void configure(AuthenticationManagerBuilder auth)
            throws Exception {
-       auth
-               .inMemoryAuthentication()
+       auth.userDetailsService(springDataUserDetailsService)
+               .passwordEncoder(bCryptPasswordEncoder);
+               /*.inMemoryAuthentication()
                .withUser("user").password("{noop}123456").roles("USER").and()
-               .withUser("admin").password("password").roles("USER", "ADMIN");
+               .withUser("admin").password("password").roles("USER", "ADMIN");*/
    }
 
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().permitAll()
+                    .antMatchers("/").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
                 .and()
-                .formLogin().and()
-                .httpBasic();
+                .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/")
+                    .permitAll();
     }
 }
