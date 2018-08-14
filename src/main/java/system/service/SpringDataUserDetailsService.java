@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import system.model.User;
 import system.model.UserRoleEnum;
 
@@ -18,11 +19,15 @@ public class SpringDataUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        //Через хард код устанавливаем логин
-        User user = userService.getUserByUsername("Denis");
 
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+
+        //Находим пользователя с данным юзернеймом
+        //Так как данные хранятся в БД, то
+        //Через сервис ищем данного юзера
+        User user = userService.getUserByUsername(s);
         //Указываем логин
+        //Присваиваем роль(и) для данного юзера в юзердетаэилс
         Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
         roles.add(new SimpleGrantedAuthority(UserRoleEnum.ADMIN.name()));
 

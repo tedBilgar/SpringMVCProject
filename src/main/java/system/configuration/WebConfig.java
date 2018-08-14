@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import system.model.Product;
+import system.model.User;
 import system.repo.ProductRepo;
 import system.service.SpringDataUserDetailsService;
 
@@ -57,7 +58,7 @@ public class WebConfig {
         props.setProperty("show_sql","true");
 
         sessionFactory.setHibernateProperties(props);
-        sessionFactory.setAnnotatedClasses(Product.class);
+        sessionFactory.setAnnotatedClasses(Product.class, User.class);
 
         return sessionFactory;
     }
