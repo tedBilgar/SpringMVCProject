@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import system.model.Product;
 import system.model.Select;
+import system.model.User;
 import system.service.ProductService;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class NewProductController {
     @Autowired
     private ProductService productService;
 
+    //Главная страница и READ
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String findAll(Model model){
         model.addAttribute("product",new Product());
@@ -27,12 +29,14 @@ public class NewProductController {
         return "main";
     }
 
+    //CREATE
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String addProduct(@ModelAttribute("product") Product product, Model model){
         productService.addProduct(product);
         return "redirect:/";
     }
 
+    //CUSTOM
     @RequestMapping(value = "/select",method = RequestMethod.POST)
     public String selectProduct(@ModelAttribute("select") Select select,Model model){
         List<Product> selectProducts = productService.selectProducts(Integer.parseInt(select.getSum()),Integer.parseInt(select.getSelectWeight()));
@@ -43,10 +47,21 @@ public class NewProductController {
         return "main";
     }
 
+    //DELETE
     @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
     public String deleteProduct(@PathVariable("id")String id, Model model){
         productService.deleteProduct(id);
 
+        return "redirect:/";
+    }
+
+    //UPDATE
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.GET)
+    public String updateProduct(@PathVariable("id")String id){
+        Product product = productService.findById(id);
+        product.setPrice("200");
+        product.setWeight("200");
+        productService.updateProduct(product);
         return "redirect:/";
     }
 
