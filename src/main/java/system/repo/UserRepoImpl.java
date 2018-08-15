@@ -38,20 +38,18 @@ public class UserRepoImpl implements UserRepo {
 
     @Transactional
     public User getUserByUsername(String username) {
-        //Временно создаю без базы данных
-       /* User user = new User();
-        user.setUsername(username);
-        user.setPassword("$2a$04$SRTSWrsS0Nrn1UXtGkR1b.AgkLUErHhyEgGVXS4rp2V2snWaP3ex.");*/
 
-       User currentUser = new User();
+      /* User currentUser = new User();
        List<User> users = findAll();
         for (User user: users) {
             if(user.getUsername().equals(username)) {
                 currentUser = user;
                 break;
             }
-        }
-        //return sessionFactory.getCurrentSession().get(Product.class,id);
-        return currentUser;
+        }*/
+        return (User) sessionFactory.getCurrentSession().createQuery("from User where username = :usernameParam")
+                .setParameter("usernameParam",username).uniqueResult();
+
+        /*return currentUser;*/
     }
 }
