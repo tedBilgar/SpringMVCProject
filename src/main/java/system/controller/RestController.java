@@ -3,9 +3,7 @@ package system.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import system.model.Product;
 import system.model.User;
 import system.service.ProductService;
@@ -18,14 +16,43 @@ public class RestController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/simple",method = RequestMethod.GET)
-    @ResponseBody
-    public List<Product> userSignUpPage(Model model){
-        List<Product> products = productService.findAll();
-        for (Product product:
-             products) {
-            System.out.println(product);
-        }
-        return products;
+    @RequestMapping(method = RequestMethod.GET)
+    public String jqueryPage(){
+        return "jqueryExample";
     }
+    @RequestMapping(value = "/findAll",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Product> userFindAll(){
+        return productService.findAll();
+    }
+
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @ResponseBody
+    public Product userAdd(@RequestBody Product product){
+        productService.addProduct(product);
+        return product;
+    }
+
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteUser(@PathVariable("id")String id){
+        productService.deleteProduct(id);
+    }
+
+    @RequestMapping(value = "/update",method = RequestMethod.PUT)
+    @ResponseBody
+    public Product updateUser(@RequestBody Product product){
+        productService.updateProduct(product);
+        return product;
+    }
+
+    @RequestMapping(value = "/select",method =RequestMethod.GET)
+    @ResponseBody
+    public List<Product> selectProduct(@RequestParam("price")String price,@RequestParam("weight")String weight){
+        return productService.selectProducts(Integer.parseInt(price),Integer.parseInt(weight));
+    }
+
+
 }
+
+

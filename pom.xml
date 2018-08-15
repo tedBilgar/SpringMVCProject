@@ -109,6 +109,7 @@
             <artifactId>commons-dbcp2</artifactId>
             <version>2.3.0</version>
         </dependency>
+
         <!--MySQL supports Версию необходимо менять в зависимости от поставленной версии сервера-->
         <dependency>
             <groupId>mysql</groupId>
@@ -116,7 +117,7 @@
             <version>8.0.11</version>
         </dependency>
 
-        <!-- Gson для rest работы с json-->
+        <!--Jackson для работы с JSON-->
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -127,6 +128,13 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.13</version>
+        </dependency>
+
+        <!--С Java 9 необходима данная зависимость для работы -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
         </dependency>
 
     </dependencies>
