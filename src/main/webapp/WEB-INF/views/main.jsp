@@ -39,7 +39,8 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Weight</th>
-<sec:authorize access="hasAuthority('ADMIN')" ><th>Delete</th></sec:authorize>
+                <sec:authorize access="hasAuthority('ADMIN')" ><th>Update</th></sec:authorize>
+                <sec:authorize access="hasAuthority('ADMIN')" ><th>Delete</th></sec:authorize>
             </tr>
             <c:forEach var="product" items="${listOfProducts}">
                 <tr>
@@ -47,6 +48,7 @@
                     <td>${product.name}</td>
                     <td>${product.price}</td>
                     <td>${product.weight}</td>
+                    <sec:authorize access="hasAuthority('ADMIN')"><td><a href="<c:url value='/update/${product.id}'/>">Update</a></td></sec:authorize>
                     <sec:authorize access="hasAuthority('ADMIN')"><td><a href="<c:url value='/delete/${product.id}'/>">Delete</a></td></sec:authorize>
                 </tr>
             </c:forEach>

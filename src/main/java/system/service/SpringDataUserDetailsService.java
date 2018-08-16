@@ -34,7 +34,7 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         //Производим аутентификацию пользователя
         UserDetails userDetails = new org.springframework.security.core.userdetails.
                 User(user.getUsername(),user.getPassword(),roles);
-        System.out.println("ROLES " + roles);
+
         return userDetails;
     }
 

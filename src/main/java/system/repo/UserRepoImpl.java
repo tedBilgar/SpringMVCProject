@@ -39,17 +39,8 @@ public class UserRepoImpl implements UserRepo {
     @Transactional
     public User getUserByUsername(String username) {
 
-      /* User currentUser = new User();
-       List<User> users = findAll();
-        for (User user: users) {
-            if(user.getUsername().equals(username)) {
-                currentUser = user;
-                break;
-            }
-        }*/
         return (User) sessionFactory.getCurrentSession().createQuery("from User where username = :usernameParam")
                 .setParameter("usernameParam",username).uniqueResult();
 
-        /*return currentUser;*/
     }
 }

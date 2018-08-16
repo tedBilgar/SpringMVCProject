@@ -2,10 +2,12 @@ package system.configuration;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -13,6 +15,8 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -28,17 +32,12 @@ import system.service.SpringDataUserDetailsService;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-/*
-    WebMvcConfigurer для configureContentNegotiation
-    который необходим для отображения объектов java
-    в appl/json формат для отображения в браузере
- */
 @Configuration
 @EnableWebMvc
 @ComponentScan("system")
 @EnableTransactionManagement
 @Import({SecurityConfig.class})
-public class WebConfig /*implements WebMvcConfigurer*/ {
+public class WebConfig implements WebMvcConfigurer {
     @Bean
     public ViewResolver viewResolver(){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -90,4 +89,17 @@ public class WebConfig /*implements WebMvcConfigurer*/ {
         return new BCryptPasswordEncoder(strength);
     }
 
+    @Bean
+    public MessageSource messageSource(){
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasename("classpath:messages");
+        return source;
+    }
+
+
+    public Validator getValidator() {
+        LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+        validatorFactoryBean.setValidationMessageSource(messageSource());
+        return validatorFactoryBean;
+    }
 }

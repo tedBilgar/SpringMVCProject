@@ -16,10 +16,12 @@
     <p>
         <label for="username">Username</label>
         <form:input type="text" id="username" name="username" path="username"/>
+        <form:errors path="username" cssStyle="color: crimson"/>
     </p>
     <p>
         <label for="password">Password</label>
         <form:input type="password" id="password" name="password" path="password"/>
+        <form:errors path="password" cssStyle="color: crimson"/>
     </p>
     <input type="hidden"
            name="${_csrf.parameterName}"
