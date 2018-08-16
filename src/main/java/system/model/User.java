@@ -17,10 +17,10 @@ public class User {
     private String id;
 
     @Column(name = "username")
-    @Size(max = 20,min=4,message = "Необходимо от 4 до 20 символов")
+    @Size(max = 20,min=4,message = "{user.name.size}")
     private String username;
     @Column(name = "password")
-    @Size(max = 20,min=6,message = "Необходимо от 6 до 20 символов")
+    @Size(max = 20,min=6,message = "{user.password.size}")
     private String password;
 
     public User() {

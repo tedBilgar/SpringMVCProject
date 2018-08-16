@@ -33,7 +33,7 @@ public class UserController {
         userService.addUser(user);
         return "redirect:/";
     }
-
+    
     // Для авторизации пользователя
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
