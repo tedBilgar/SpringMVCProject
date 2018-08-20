@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import system.model.Product;
 import system.model.Select;
-import system.model.User;
 import system.service.ProductService;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class NewProductController {
         model.addAttribute("product",new Product());
         model.addAttribute("select",new Select());
         model.addAttribute("listOfProducts",productService.findAll());
-        return "main";
+        return "jsp/main";
     }
 
     //CREATE
@@ -44,7 +43,7 @@ public class NewProductController {
         model.addAttribute("select",select);
         model.addAttribute("product",new Product());
         model.addAttribute("listOfProducts",productService.findAll());
-        return "main";
+        return "jsp/main";
     }
 
     //DELETE
@@ -67,6 +66,6 @@ public class NewProductController {
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String getLoginForm(){
-        return "loginForm";
+        return "jsp/loginForm";
     }
 }

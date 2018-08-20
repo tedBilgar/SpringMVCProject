@@ -9,7 +9,6 @@ import system.model.Select;
 import system.repo.ProductRepo;
 import system.service.ProductService;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 // Старая версия контроллера
@@ -25,21 +24,21 @@ public class ProductController {
     @RequestMapping(value = "/findAll",method = RequestMethod.GET)
     public String findAll(Model model){
         model.addAttribute("products",productService.findAll());
-        return "products";
+        return "jsp/products";
     }
 
     @RequestMapping(value = "/id/{productId}",method = RequestMethod.GET)
     public String findById(@PathVariable("productId") String productId,Model model){
         //model.addAttribute("products",productService.findById(productId));
         model.addAttribute("product",productService.findById(productId));
-        return "product";
+        return "jsp/product";
     }
 
     @RequestMapping(value = "/name/{productName}",method = RequestMethod.GET)
     public String findByName(@PathVariable("productName") String productName,Model model){
         //model.addAttribute("products",productService.findByName(productName));
        /* model.addAttribute("product",productService.findByName(productName));*/
-        return "product";
+        return "jsp/product";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -55,17 +54,17 @@ public class ProductController {
         model.addAttribute("selectProducts",selectProducts);
         model.addAttribute("select",select);
         model.addAttribute("allProducts",productService.findAll());
-        return "selectProducts";
+        return "jsp/selectProducts";
     }
 
     @RequestMapping(value = "/form",method = RequestMethod.GET)
     public String getForm(){
-        return "form";
+        return "jsp/form";
     }
 
     @RequestMapping(value = "/set",method = RequestMethod.GET)
     public String setProducts(){
         System.out.println(productRepo.findAll());
-        return "form";
+        return "jsp/form";
     }
 }

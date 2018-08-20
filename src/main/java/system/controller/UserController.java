@@ -22,13 +22,13 @@ public class UserController {
     @RequestMapping(value = "/signup",method = RequestMethod.GET)
     public String userSignUpPage(Model model){
         model.addAttribute("user",new User());
-        return "userSignUp";
+        return "jsp/userSignUp";
     }
 
     @RequestMapping(value = "/addUser",method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user")@Valid User user,BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
-            return "userSignUp";
+            return "jsp/userSignUp";
         }
         userService.addUser(user);
         return "redirect:/";
@@ -39,7 +39,7 @@ public class UserController {
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String userLoginPage(Model model){
         model.addAttribute("user",new User());
-        return "userLogin";
+        return "jsp/userLogin";
     }
 
 }
