@@ -7,3 +7,7 @@ app.controller("appCtrl",function ($scope,$http) {
         $scope.products=response.data;
     });
 });
+
+app.controller("selectCtrl",function ($scope,$http) {
+
+});

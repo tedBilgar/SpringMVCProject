@@ -2,8 +2,10 @@ package system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import system.model.Product;
+import system.model.Select;
 import system.service.ProductService;
 
 import java.util.List;
@@ -19,7 +21,8 @@ public class RestController {
         return "jsp/jqueryExample";
     }
     @RequestMapping(value = "/ng",method = RequestMethod.GET)
-    public String angularPage(){
+    public String angularPage(Model model){
+        model.addAttribute("select",new Select());
         return "angular/example";
     }
 
