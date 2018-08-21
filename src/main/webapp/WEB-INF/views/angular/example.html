@@ -27,17 +27,29 @@
                     <td>{{product.name}}</td>
                     <td>{{product.price}}</td>
                     <td>{{product.weight}}</td>
-                    <td><input type="button" ng-click="delete(product)" value="Update"></td>
+                    <td><input type="button" ng-click="show(product)" value="Update"></td>
                     <td><input type="button" ng-click="delete(product)" value="Delete"></td>
                 </tr>
         </table>
     </table>
+
+    <div ng-show="IsVisible">
+        <h3> Last updated product is {{updatedProduct}}</h3>
+        <span> You want to update {{willBeUpdated}}</span>
+        <form novalidate >
+            <input type="text" ng-model="updatedProduct.name"/><br>
+            <input type="text" ng-model="updatedProduct.price"/><br>
+            <input type="text" ng-model="updatedProduct.weight"/><br>
+            <input type="button" ng-click="updateProduct(updatedProduct)" value="Update"/>
+        </form>
+    </div>
+
     <h3>New Added Product: {{addedProduct.name}}</h3>
     <form novalidate >
         <input type="text" ng-model="product.name"/><br>
         <input type="text" ng-model="product.price"/><br>
         <input type="text" ng-model="product.weight"/><br>
-        <input type="submit" ng-click="update(product)"/>
+        <input type="submit" ng-click="add(product)"/>
     </form>
 
 </div>
@@ -59,6 +71,7 @@
             </tr>
         </table>
     </table>
+    <h3>Please,choose your params</h3>
     <form novalidate >
         <input type="text" ng-model="select.sum"/>
         <input type="text" ng-model="select.selectWeight"/>

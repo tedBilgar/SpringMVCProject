@@ -2,18 +2,44 @@ var app = angular.module("app",[]);
 
 app.controller("appCtrl",function ($scope,$http) {
     $scope.products = [];
+    $scope.IsVisible = false;
+    $scope.currentIdForUpdate;
 
     $http.get('http://localhost:8080/rest/findAll').then(function (response) {
         $scope.products=response.data;
     });
 
-    $scope.update = function (product) {
+    $scope.add = function (product) {
         var url = 'http://localhost:8080/rest/add';
         var body = product;
         $http.post(url,body)
             .then(function (response) {
                 $scope.addedProduct = response.data;
 
+                $http.get('http://localhost:8080/rest/findAll').then(function (response) {
+                    $scope.products=response.data;
+                });
+            });
+    };
+
+    $scope.show = function (product) {
+        $scope.currentIdForUpdate = product.id;
+        $scope.willBeUpdated = product.name;
+        $scope.IsVisible = $scope.IsVisible = true;
+    };
+
+    $scope.updateProduct = function (updatedProduct) {
+        var url = 'http://localhost:8080/rest/update';
+        var body = {
+          id: $scope.currentIdForUpdate,
+          name: updatedProduct.name,
+          price: updatedProduct.price,
+          weight: updatedProduct.weight
+        };
+        $http.put(url,body)
+            .then(function (response) {
+                $scope.updatedProduct = response.data.name;
+                $scope.IsVisible = false;
                 $http.get('http://localhost:8080/rest/findAll').then(function (response) {
                     $scope.products=response.data;
                 });
