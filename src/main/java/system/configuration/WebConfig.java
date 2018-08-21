@@ -24,6 +24,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -35,6 +37,7 @@ import system.service.SpringDataUserDetailsService;
 
 import javax.sql.DataSource;
 import java.util.Properties;
+import java.util.Set;
 
 @Configuration
 @EnableWebMvc
@@ -63,6 +66,7 @@ public class WebConfig implements WebMvcConfigurer {
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
+
         return templateEngine;
     }
     @Bean

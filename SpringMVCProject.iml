@@ -80,6 +80,6 @@
     <orderEntry type="library" name="Maven: org.unbescape:unbescape:1.1.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.thymeleaf:thymeleaf-spring5:3.0.9.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.thymeleaf.extras:thymeleaf-extras-springsecurity4:unknown" level="project" />
+    <orderEntry type="library" name="Maven: org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE" level="project" />
   </component>
 </module>

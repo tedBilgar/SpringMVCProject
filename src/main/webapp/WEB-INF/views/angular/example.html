@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" ng-app="app"  xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +7,8 @@
 </head>
 <body >
 <h1>Product list</h1>
-<span sec:authorize="isAuthenticated()"> AUTH</span>
-<span sec:authorize="isAnonymous()">NOT AUTH</span>
+<div sec:authorize="isAuthenticated()"> AUTH</div>
+<div sec:authorize="isAnonymous()">NOT AUTH</div>
 
 <div ng-controller="appCtrl">
     <table >
