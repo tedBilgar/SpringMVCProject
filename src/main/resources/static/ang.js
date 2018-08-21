@@ -20,6 +20,17 @@ app.controller("appCtrl",function ($scope,$http) {
             });
     };
 
+    $scope.delete = function (product) {
+        var url = 'http://localhost:8080/rest/delete';
+        var id = product.id;
+        $http.delete(url+'/'+id)
+            .then(function (response) {
+                $http.get('http://localhost:8080/rest/findAll').then(function (response) {
+                    $scope.products=response.data;
+                });
+            });
+    };
+
 });
 app.controller("selectCtrl",['$scope','$http',function ($scope,$http) {
     $scope.selectedProducts = [];
@@ -38,16 +49,3 @@ app.controller("selectCtrl",['$scope','$http',function ($scope,$http) {
 
 }]);
 
-/*
-app.controller("selectCtrl",function ($scope,$http) {
-    $scope.selectedProducts = [];
-
-    $scope.update = function (select) {
-        $scope.message2 = select;
-        $scope.master = angular.copy(select);
-        $http.get('http://localhost:8080/rest/select?price='+select.price+'&weight='+select.selectWeight).then(function (response) {
-            $scope.selectedProducts=response.data;
-            $scope.message = response.data;
-        });
-    };
-});*/
