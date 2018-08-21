@@ -19,15 +19,25 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Weight</th>
+                <th>Delete</th>
             </tr>
                 <tr ng-repeat="product in products">
                     <td>{{product.id}}</td>
                     <td>{{product.name}}</td>
                     <td>{{product.price}}</td>
                     <td>{{product.weight}}</td>
+                    <td><input type="button" ng-click="delete(product)"></td>
                 </tr>
         </table>
     </table>
+    <h3>New Added Product: {{addedProduct.name}}</h3>
+    <form novalidate >
+        <input type="text" ng-model="product.name"/><br>
+        <input type="text" ng-model="product.price"/><br>
+        <input type="text" ng-model="product.weight"/><br>
+        <input type="submit" ng-click="update(product)"/>
+    </form>
+
 </div>
 <div ng-controller="selectCtrl">
     <table >
@@ -39,7 +49,7 @@
                 <th>Price</th>
                 <th>Weight</th>
             </tr>
-            <tr ng-repeat="product in products">
+            <tr ng-repeat="product in selectedProducts">
                 <td>{{product.id}}</td>
                 <td>{{product.name}}</td>
                 <td>{{product.price}}</td>
@@ -47,11 +57,12 @@
             </tr>
         </table>
     </table>
-    <form th:action="@{/rest/select}" th:object="${select}" method="post">
-        <input type="text" th:field="*{sum}" placeholder="sum" name="sum">
-        <input type="text" th:field="*{selectWeight}" placeholder="selectWeight" name="selectWeight">
-        <button type="submit">Select</button>
+    <form novalidate >
+        <input type="text" ng-model="select.sum"/>
+        <input type="text" ng-model="select.selectWeight"/>
+        <input type="submit" ng-click="update(select)"/>
     </form>
+
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 <script src="/resources/ang.js"></script>
