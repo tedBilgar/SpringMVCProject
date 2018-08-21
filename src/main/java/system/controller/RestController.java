@@ -23,6 +23,8 @@ public class RestController {
         return "angular/example";
     }
 
+
+    // CRUD services
     @RequestMapping(value = "/findAll",method = RequestMethod.GET)
     @ResponseBody
     public List<Product> userFindAll(){

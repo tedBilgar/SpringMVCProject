@@ -1,16 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="app" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body ng-controller="appCtrl">
+<p1>Product list</p1>
+<span sec:authorize="isAuthenticated()"> AUTH</span>
+<span sec:authorize="isAnonymous()">NOT AUTH</span>
+<p2>List OF ALL Products</p2>
 <ul>
     <li ng-repeat="product in products">
         <span>{{product.name}}</span>
         <p>{{product.price}}</p>
     </li>
 </ul>
+
+<table>
+    <table border="1" cellpadding="5">
+        <caption><h2>List of ALL products</h2></caption>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Weight</th>
+        </tr>
+            <tr ng-repeat="product in products">
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.weight}}</td>
+            </tr>
+    </table>
+</table>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 <script src="/resources/ang.js"></script>
 </body>

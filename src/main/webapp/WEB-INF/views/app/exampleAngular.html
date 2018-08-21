@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en" ng-app="phonecatApp"  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Example </title>
@@ -9,9 +10,10 @@
 
     <phone-list></phone-list>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
-    <script src="app.module.js"></script>
-    <script src="phone-list/phone-list.module.js"></script>
-    <script src="phone-list/phone-list.component.js"></script>
+    {{2+2}}
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js}"></script>
+    <script th:src="@{/resources/app.module.js}"></script>
+    <script th:src="@{/resources/phone-list/phone-list.module.js}"></script>
+    <script th:src="@{/resources/phone-list/phone-list.component.js}"></script>
 </body>
 </html>

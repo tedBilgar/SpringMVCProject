@@ -11,11 +11,11 @@ component('phoneList', {
                 '<p>{{product.price}}</p>' +
             '</li>' +
         '</ul>',
-    controller: function PhoneListController($scope,$http) {
-        $scope.products = [];
+    controller: function PhoneListController($http) {
+        this.products = [];
 
          $http.get('http://localhost:8080/rest/findAll').then(function (response) {
-            $scope.products = response.data;
+            this.products = response.data;
         });
     }
 });

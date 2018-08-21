@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en" ng-app="phonecatApp" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Example </title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 
     <phone-list></phone-list>
     {{2+2}}
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
-    <script src="/resources/app.module.js"></script>
-    <script src="/resources/phone-list/phone-list.module.js"></script>
-    <script src="/resources/phone-list/phone-list.component.js"></script>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js}"></script>
+    <script th:src="@{/resources/app.module.js}"></script>
+    <script th:src="@{/resources/phone-list/phone-list.module.js}"></script>
+    <script th:src="@{/resources/phone-list/phone-list.component.js}"></script>
 </body>
 </html>
