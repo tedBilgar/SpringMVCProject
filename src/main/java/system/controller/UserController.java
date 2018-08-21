@@ -12,6 +12,7 @@ import system.service.UserService;
 
 import javax.validation.Valid;
 
+/*Контроллер для аутент и регистрации пользователя*/
 @Controller
 @RequestMapping("/user")
 public class UserController {

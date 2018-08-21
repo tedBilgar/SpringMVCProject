@@ -10,6 +10,7 @@ import system.service.ProductService;
 
 import java.util.List;
 
+/*Контроллер для API*/
 @Controller
 @RequestMapping("/rest")
 public class RestController {

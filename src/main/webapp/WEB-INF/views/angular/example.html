@@ -7,9 +7,10 @@
 </head>
 <body >
 <h1>Product list</h1>
-<div sec:authorize="isAuthenticated()"> AUTH</div>
-<div sec:authorize="isAnonymous()">NOT AUTH</div>
-
+<div sec:authorize="isAnonymous()">You have to login to delete or update list</div>
+<div sec:authorize="isAuthenticated()">
+    Hello,User !!!
+</div>
 <div ng-controller="appCtrl">
     <table >
         <table border="1" cellpadding="5">
@@ -19,16 +20,16 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Weight</th>
-                <th>Update</th>
-                <th>Delete</th>
+                <th sec:authorize="isAuthenticated()">Update</th>
+                <th sec:authorize="isAuthenticated()">Delete</th>
             </tr>
                 <tr ng-repeat="product in products">
                     <td>{{product.id}}</td>
                     <td>{{product.name}}</td>
                     <td>{{product.price}}</td>
                     <td>{{product.weight}}</td>
-                    <td><input type="button" ng-click="show(product)" value="Update"></td>
-                    <td><input type="button" ng-click="delete(product)" value="Delete"></td>
+                    <td sec:authorize="isAuthenticated()"><input type="button" ng-click="show(product)" value="Update"></td>
+                    <td sec:authorize="isAuthenticated()"><input type="button" ng-click="delete(product)" value="Delete"></td>
                 </tr>
         </table>
     </table>
@@ -53,7 +54,7 @@
     </form>
 
 </div>
-<div ng-controller="selectCtrl">
+<div ng-controller="selectCtrl" >
     <table >
         <table border="1" cellpadding="5">
             <caption><h2>List of SELECTED products</h2></caption>
@@ -73,9 +74,11 @@
     </table>
     <h3>Please,choose your params</h3>
     <form novalidate >
-        <input type="text" ng-model="select.sum"/>
-        <input type="text" ng-model="select.selectWeight"/>
-        <input type="submit" ng-click="update(select)"/>
+        <label for="price" >Price</label>
+        <input type="text" ng-model="select.sum" id="price"/>
+        <label for="weight" >Weight</label>
+        <input type="text" ng-model="select.selectWeight" id = "weight"/>
+        <input type="submit" ng-click="update(select)" value="Select"/>
     </form>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>

@@ -50,7 +50,6 @@ public class NewProductController {
     @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
     public String deleteProduct(@PathVariable("id")String id, Model model){
         productService.deleteProduct(id);
-
         return "redirect:/";
     }
 
@@ -64,8 +63,4 @@ public class NewProductController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String getLoginForm(){
-        return "jsp/loginForm";
-    }
 }
