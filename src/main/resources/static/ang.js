@@ -5,6 +5,17 @@ app.controller("appCtrl",function ($scope,$http) {
     $scope.IsVisible = false;
     $scope.currentIdForUpdate;
 
+    //Слежение за изменением состояния products
+    $scope.$watch(function () {
+        return $scope.products;
+    }, function (newVal,oldVal) {
+        if(newVal!=oldVal){
+            $http.get('http://localhost:8080/rest/findAll').then(function (response) {
+                $scope.products=response.data;
+            });
+        }
+    });
+
     $http.get('http://localhost:8080/rest/findAll').then(function (response) {
         $scope.products=response.data;
     });
@@ -25,7 +36,7 @@ app.controller("appCtrl",function ($scope,$http) {
     $scope.show = function (product) {
         $scope.currentIdForUpdate = product.id;
         $scope.willBeUpdated = product.name;
-        $scope.IsVisible = $scope.IsVisible = true;
+        $scope.IsVisible = true;
     };
 
     $scope.updateProduct = function (updatedProduct) {
