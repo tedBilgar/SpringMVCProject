@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -36,6 +37,9 @@ import system.repo.ProductRepo;
 import system.service.SpringDataUserDetailsService;
 
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.util.Properties;
 import java.util.Set;
@@ -84,7 +88,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
     }
 
-/*    @Bean
+    /*@Bean
     public DataSource dataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
@@ -93,19 +97,18 @@ public class WebConfig implements WebMvcConfigurer {
         dataSource.setPassword("123456");
         return dataSource;
     }*/
+
     @Bean
-    public JndiObjectFactoryBean dataSource(){
-        JndiObjectFactoryBean jndiObjectFactoryBean = new JndiObjectFactoryBean();
-        jndiObjectFactoryBean.setJndiName("jdbc/mydbcp");
-        jndiObjectFactoryBean.setResourceRef(true);
-        jndiObjectFactoryBean.setProxyInterface(javax.sql.DataSource.class);
-        return jndiObjectFactoryBean;
+    public DataSource dataSource() throws NamingException {
+        JndiDataSourceLookup dataSource = new JndiDataSourceLookup();
+        dataSource.setResourceRef(true);
+        return  dataSource.getDataSource("jdbc/mydbcp");
     }
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory(){
+    public LocalSessionFactoryBean sessionFactory() throws NamingException {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource((DataSource) dataSource());
+        sessionFactory.setDataSource( dataSource());
         Properties props = new Properties();
         props.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
         props.setProperty("show_sql","true");
@@ -117,7 +120,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public HibernateTransactionManager getTransactionManager() {
+    public HibernateTransactionManager getTransactionManager() throws NamingException {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
