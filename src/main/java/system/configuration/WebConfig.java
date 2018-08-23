@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -83,7 +84,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
     }
 
-    @Bean
+/*    @Bean
     public DataSource dataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
@@ -91,12 +92,20 @@ public class WebConfig implements WebMvcConfigurer {
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
         return dataSource;
+    }*/
+    @Bean
+    public JndiObjectFactoryBean dataSource(){
+        JndiObjectFactoryBean jndiObjectFactoryBean = new JndiObjectFactoryBean();
+        jndiObjectFactoryBean.setJndiName("jdbc/mydbcp");
+        jndiObjectFactoryBean.setResourceRef(true);
+        jndiObjectFactoryBean.setProxyInterface(javax.sql.DataSource.class);
+        return jndiObjectFactoryBean;
     }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(){
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setDataSource((DataSource) dataSource());
         Properties props = new Properties();
         props.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
         props.setProperty("show_sql","true");
