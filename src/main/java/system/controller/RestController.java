@@ -36,7 +36,7 @@ public class RestController {
 *//*
         model.addAttribute("select",new Select());
         model.addAttribute("page-title", properties.getProperty("Title"));*/
-        model.addAttribute("prop","HELLLLLLO");
+        model.addAttribute("Title","ttitti");
         //System.out.println("RRRRRRRRRRRRRRRRR  " + properties.getProperty("Title"));
         return "angular/example";
     }

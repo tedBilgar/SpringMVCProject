@@ -88,7 +88,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
     }
 
-/*    @Bean
+    @Bean
     public DataSource dataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
@@ -96,14 +96,14 @@ public class WebConfig implements WebMvcConfigurer {
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
         return dataSource;
-    }*/
+    }
 
-    @Bean
+/*    @Bean
     public DataSource dataSource() throws NamingException {
         JndiDataSourceLookup dataSource = new JndiDataSourceLookup();
         dataSource.setResourceRef(true);
         return  dataSource.getDataSource("jdbc/mysql");
-    }
+    }*/
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() throws NamingException {

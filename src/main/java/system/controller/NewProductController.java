@@ -20,16 +20,16 @@ import java.util.Properties;
 public class NewProductController {
     @Autowired
     private ProductService productService;
-    @Resource(lookup = "sample_custom_resource")
+  /*  @Resource(lookup = "sample_custom_resource")
     private Properties properties;
-
+*/
     //Главная страница и READ
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String findAll(Model model){
         model.addAttribute("product",new Product());
         model.addAttribute("select",new Select());
         model.addAttribute("listOfProducts",productService.findAll());
-        model.addAttribute("Title",properties.getProperty("Title"));
+        //model.addAttribute("Title",properties.getProperty("Title"));
         return "jsp/main";
     }
 
