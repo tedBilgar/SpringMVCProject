@@ -11,13 +11,17 @@ import system.model.Product;
 import system.model.Select;
 import system.service.ProductService;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Properties;
 
 // Новая версия контроллера
 @Controller
 public class NewProductController {
     @Autowired
     private ProductService productService;
+    @Resource(lookup = "sample_custom_resource")
+    private Properties properties;
 
     //Главная страница и READ
     @RequestMapping(value = "/",method = RequestMethod.GET)
@@ -25,6 +29,7 @@ public class NewProductController {
         model.addAttribute("product",new Product());
         model.addAttribute("select",new Select());
         model.addAttribute("listOfProducts",productService.findAll());
+        model.addAttribute("Title",properties.getProperty("Title"));
         return "jsp/main";
     }
 

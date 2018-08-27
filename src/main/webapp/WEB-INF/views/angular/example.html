@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${page-title}"></title>
 </head>
 <body >
 <h1>Product list</h1>
@@ -11,6 +11,8 @@
 <div sec:authorize="isAuthenticated()">
     Hello,User !!!
 </div>
+
+<p ng-model="prop"></p>
 <div ng-controller="appCtrl">
     <table >
         <table border="1" cellpadding="5">
